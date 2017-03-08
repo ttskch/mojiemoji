@@ -1,10 +1,23 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-    <ul class="nav nav-tabs mb15">
-        <li class="active"><a>Home</a></li>
-        <li><a href="{{ url('form') }}">Form Sample</a></li>
-    </ul>
+    <div class="row" style="padding:100px 0;">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="text-center" style="display:block; margin-bottom:50px;">
+                <a href="{{ path('download', { 'base64': base64 }) }}">
+                    <img src="{{ 'data:image/png;base64,' ~ base64 }}" style="border:1px solid #eee;">
+                </a>
+            </div>
 
-    <p>Welcome to your new Silex Application!</p>
+            <form action="{{ path('homepage') }}" method="post" class="form-horizontal">
+                {{ form_errors(form.moji) }}
+                <div class="input-group">
+                    {{ form_widget(form.moji, { attr: { maxlength: 4 } }) }}
+                    <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">生成</button>
+            </span>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
