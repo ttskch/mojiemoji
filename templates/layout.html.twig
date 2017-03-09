@@ -4,14 +4,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% spaceless %}
-        <title>
-            {% block subtitle %}{% endblock %}
-            {% if block('subtitle') is not empty %} | {% endif %}
-            {% block site_title %}mojiemoji{% endblock %}
-        </title>
-    {% endspaceless %}
+    <title>
+        {% block title %}{#
+            #}{% block subtitle %}4文字以下の日本語からSlack用絵文字を生成{% endblock %}{#
+            #}{% if block('subtitle') is not empty %} | {% endif %}{#
+            #}{% block site_title %}mojiemoji{% endblock %}{#
+        #}{% endblock %}
+    </title>
+    <meta name="description" content="{{ block('subtitle') }}">
+    <link rel="canonical" href="{{ url('homepage') }}">
+
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
+    <meta property="og:title" content="{{ block('title') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ asset('img/naruhodo.png') }}">
+    <meta property="og:url" content="{{ url('homepage') }}">
+    <meta property="og:site_name" content="{{ block('title') }}">
+    <meta property="fb:admins" content="844117658995968">
+    <meta property="fb:app_id" content="1775766859321672">
+    <meta property="og:description" content="{{ block('subtitle') }}">
 
     <link href="{{ asset('lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 

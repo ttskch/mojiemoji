@@ -59,7 +59,7 @@ $app->match('/', function (Request $request) use ($app) {
         return $app->redirect($app['url_generator']->generate('homepage'));
     }
 
-    $base64 = $app['session']->get('base64') ?: base64_encode(file_get_contents(__DIR__.'/../files/naruhodo.png'));
+    $base64 = $app['session']->get('base64') ?: base64_encode(file_get_contents(__DIR__.'/../web/img/naruhodo.png'));
     $app['session']->set('base64', null);
 
     return $app['twig']->render('index.html.twig', [
