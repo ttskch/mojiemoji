@@ -1,0 +1,24 @@
+version: '2'
+services:
+  nginx:
+    image: ttskch/nginx-for-silex
+    container_name: mojiemoji_nginx
+#    ports:
+#      - '8888:80'
+#      - '80:80'
+    depends_on:
+      - php
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - .:/var/www
+    environment:
+      VIRTUAL_HOST: mojiemoji.ttskch.com
+  php:
+    image: ttskch/php-fpm-with-gd
+    container_name: mojiemoji_php
+    volumes:
+      - .:/var/www
+networks:
+  default:
+    external:
+      name: nginxproxy_default
