@@ -15,29 +15,38 @@ $app->match('/', function (Request $request) use ($app) {
 
     $form->handleRequest($request);
     if ($form->isValid()) {
-        $moji = $request->request->get('form')['moji'];
-        switch (mb_strlen($moji)) {
+        $data = $request->request->get('form');
+
+        $font = [
+            'file' => __DIR__.'/../files/'.($data['font'] === '明朝' ? 'ipaexm.ttf' : 'ipaexg.ttf'),
+            'linespacing' => 0.9,
+            'size' => [120, 62, 62],
+            'x' => [6, 4, 4],
+            'y' => [146, 116, 78],
+        ];
+
+        switch (mb_strlen($moji = $data['moji'])) {
             case 1:
-                $size = 128 * 72/96;
-                $x = 2 * 72/96;
-                $y = 150 * 72/96;
+                $size = $font['size'][0] * 72/96;
+                $x = $font['x'][0] * 72/96;
+                $y = $font['y'][0] * 72/96;
                 break;
             case 2:
-                $size = 60 * 72/96;
-                $x = 6 * 72/96;
-                $y = 114 * 72/96;
+                $size = $font['size'][1] * 72/96;
+                $x = $font['x'][1] * 72/96;
+                $y = $font['y'][1] * 72/96;
                 break;
             default:
-                $size = 60 * 72/96;
-                $x = 4 * 72/96;
-                $y = 74 * 72/96;
+                $size = $font['size'][2] * 72/96;
+                $x = $font['x'][2] * 72/96;
+                $y = $font['y'][2] * 72/96;
                 $moji = mb_substr($moji, 0, 2)."\n".mb_substr($moji, 2, 4);
                 break;
         }
 
         $image = imagecreatefrompng(__DIR__.'/../files/template.png');
         $fgcolor = imagecolorallocate($image, 0, 0, 0);
-        imagefttext($image, $size, 0, $x, $y, $fgcolor, __DIR__.'/../files/SourceHanCodeJP-Regular.otf', $moji, ['linespacing' => 0.7]);
+        imagefttext($image, $size, 0, $x, $y, $fgcolor, $font['file'], $moji, ['linespacing' => $font['linespacing']]);
 
         ob_start();
         imagepng($image);

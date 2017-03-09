@@ -9,13 +9,16 @@
                 </a>
             </div>
 
-            <form action="{{ path('homepage') }}" method="post" class="form-horizontal">
+            <form action="{{ path('homepage') }}" method="post" class="form-horizontal" novalidate>
                 {{ form_errors(form.moji) }}
                 <div class="input-group">
                     {{ form_widget(form.moji, { attr: { maxlength: 4 } }) }}
                     <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary">生成</button>
-            </span>
+                        <button type="submit" class="btn btn-primary">生成</button>
+                    </span>
+                </div>
+                <div class="clearfix mt5">
+                    {{ form_widget(form.font) }}
                 </div>
             </form>
         </div>

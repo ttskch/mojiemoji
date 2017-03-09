@@ -5,6 +5,12 @@ body .control-label.required:after {
 body .form-error {
   margin-bottom: 10px;
 }
+body .radio {
+  float: left;
+}
+body .radio:not(:first-child) {
+  margin-left: 1em;
+}
 #content .mt0 {
   margin-top: 0    !important;
 }
