@@ -9,7 +9,7 @@
                 </a>
             </div>
 
-            <form action="{{ path('homepage') }}" method="post" class="form-horizontal" novalidate>
+            <form action="{{ path('homepage') }}" method="post" class="form-horizontal">
                 {{ form_errors(form.moji) }}
                 <div class="input-group">
                     {{ form_widget(form.moji, { attr: { maxlength: 4 } }) }}
