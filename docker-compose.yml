@@ -13,11 +13,15 @@ services:
       - .:/var/www
     environment:
       VIRTUAL_HOST: mojiemoji.ttskch.com
+      LETSENCRYPT_HOST: mojiemoji.ttskch.com
+      LETSENCRYPT_EMAIL: kanemoto.takashi+mojiemoji@gmail.com
+    restart: always
   php:
     image: ttskch/php-fpm-with-gd
     container_name: mojiemoji_php
     volumes:
       - .:/var/www
+    restart: always
 networks:
   default:
     external:
