@@ -29,3 +29,6 @@ services:
 
     Symfony\Component\Translation\TranslatorInterface: '@translator.default'
     Symfony\Component\HttpFoundation\Session\SessionInterface: '@session'
+
+    App\Service\EmojiGenerator:
+        arguments: []

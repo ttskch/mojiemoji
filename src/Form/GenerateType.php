@@ -2,11 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\GenerateCriteria;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GenerateType extends AbstractType
 {
@@ -18,25 +19,25 @@ class GenerateType extends AbstractType
                     'autofocus' => true,
                     'placeholder' => 'なるほど',
                 ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ],
             ])
             ->add('font', ChoiceType::class, [
-                'choices' => $fontChoices = [
-                    'ゴシック' => 'ゴシック',
-                    '明朝' => '明朝',
+                'choices' => [
+                    GenerateCriteria::FONT_GOTHIC => GenerateCriteria::FONT_GOTHIC,
+                    GenerateCriteria::FONT_MINCHO => GenerateCriteria::FONT_MINCHO,
                 ],
-                'data' => 'ゴシック',
                 'expanded' => true,
                 'multiple' => false,
                 'attr' => [
                     'inline' => true,
                 ],
-                'constraints' => [
-                    new Assert\Choice(array_keys($fontChoices)),
-                ],
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => GenerateCriteria::class,
+        ]);
     }
 }
