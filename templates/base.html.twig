@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>
+        {%- block title %}
+            {%- block subtitle %}{% endblock -%}
+            {%- if block('subtitle') is not empty %} | {% endif -%}
+            {%- block site_title %}mojiemoji{% endblock -%}
+        {% endblock -%}
+    </title>
+    <meta name="description" content="{{ block('subtitle') }}">
+    <link rel="canonical" href="{{ app.request.uri }}">
+
+    <link rel="apple-touch-icon" href="{{ asset('statics/naruhodo.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('statics/naruhodo.png') }}" type="image/x-icon">
+
+    <meta property="og:title" content="{{ block('title') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ absolute_url(asset('statics/naruhodo.png')) }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:site_name" content="{{ block('title') }}">
+    <meta property="fb:admins" content="844117658995968">
+    <meta property="fb:app_id" content="186549258503363">
+    <meta property="og:description" content="{{ block('subtitle') }}">
+
+    <link href="{{ asset('build/vendors.css') }}" rel="stylesheet">
+
+    {% block stylesheets %}
+        <link href="{{ asset('build/app.css') }}" rel="stylesheet">
+    {% endblock %}
+</head>
+
+<body>
+{% block body %}
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('home_index') }}">
+                <span><i class="fa fa-clone"></i> {{ block('site_title') }}</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-1">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="https://slack.com/customize/emoji" target="_blank" class="nav-link"><i class="fa fa-slack"></i> Customize Slack</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div id="content" class="my-3 mb-5">
+            {% block flashes %}
+                {% if app.session.flashbag.peekAll|length > 0 %}
+                    {% for type, messages in app.session.flashbag.all %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        {% block footer %}
+            <footer id="footer" class="py-4">
+                <div class="text-center">
+                    <a href="http://ttskch.github.io" target="_blank"><b>ttskch</b></a> &copy; 2017 / <a href="https://github.com/ttskch/mojiemoji" target="_blank"><i class="fa fa-github"></i></a>
+                </div>
+            </footer>
+        {% endblock %}
+    </div>
+
+    <script src="{{ asset('build/manifest.js') }}"></script>
+    <script src="{{ asset('build/vendors.js') }}"></script>
+
+    {% block javascripts %}
+        <script src="{{ asset('build/app.js') }}"></script>
+    {% endblock %}
+
+    {% include 'widgets/addthis.html.twig' %}
+    {% include 'widgets/google-analytics.html.twig' %}
+{% endblock body %}
+</body>
+</html>

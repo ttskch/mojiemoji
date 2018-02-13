@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block subtitle %}4文字以下の日本語からSlack用絵文字を生成{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="d-none d-sm-block" style="height:7rem"></div>
+
+            <div class="text-center">
+                <a href="{{ path('home_download', {'base64': base64}) }}" class="d-inline-block mb-3">
+                    <img src="{{ 'data:image/png;base64,' ~ base64 }}" id="thumbnail">
+                </a>
+            </div>
+
+            <div class="d-none d-sm-block" style="height:4rem"></div>
+
+            <form action="{{ path('home_index') }}" method="post" class="form-horizontal">
+                {{ form_errors(form.moji) }}
+                <div class="input-group">
+                    {{ form_widget(form.moji, {attr: {maxlength: 4}}) }}
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-refresh"></i> 生成する</button>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    {{ form_widget(form.font) }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
