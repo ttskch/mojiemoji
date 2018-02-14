@@ -8,7 +8,7 @@
             <div class="d-none d-sm-block" style="height:7rem"></div>
 
             <div class="text-center">
-                <a href="{{ path('home_download', {'base64': base64}) }}" class="d-inline-block mb-3">
+                <a href="{{ path('home_download', {'base64': base64}) }}" class="d-inline-block mb-3" id="thumbnail">
                     <img src="{{ 'data:image/png;base64,' ~ base64 }}" id="thumbnail">
                 </a>
             </div>
