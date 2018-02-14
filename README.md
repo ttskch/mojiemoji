@@ -1,6 +1,6 @@
 # mojiemoji
 
-![](https://cloud.githubusercontent.com/assets/4360663/23755920/462c331a-0525-11e7-90ab-bf2e3f502291.png)
+![image](https://user-images.githubusercontent.com/4360663/36198666-8914115a-11ba-11e8-8555-548513142a10.png)
 
 4文字以下の日本語から絵文字を生成  
 http://mojiemoji.ttskch.com
